@@ -9,25 +9,37 @@ import Foundation
 /*:
  Imagine we are rolling two six-sided dice. We can use a tuple to represent each of the dice values.
  */
-let diceRoll = (5, 6)
+//let diceRoll = (5, 6)
 
 // Our switch statement looks for the cases where the total value of the dice rolled is 11
-switch diceRoll {
-case (5, 6):
-  print("We got 11!")
-case (6, 5):
-  print("We got 11!")
-default:
-  print("This roll doesn't matter to us")
-}
+//switch diceRoll {
+//case (5, 6):
+//  print("We got 11!")
+//case (6, 5):
+//  print("We got 11!")
+//default:
+//  print("This roll doesn't matter to us")
+//}
 
 /*:
  - Experiment:
  Use the below switch statement to test the following cases. What do they do? Try changing the value of `diceRoll` to see what happens!
- - case (_, 1)
- - case (2, _)
- - case (1...3, 1...3)
- - case (let x, let y) where x == y
+ */
+let diceRoll = (4, 4)
+
+switch diceRoll {
+case (_, 1):
+    print("We got 1!")
+case (2, _):
+    print("We got 2!")
+case (1...3, 1...3):
+    print("i dont even know!")
+case (let x, let y) where x == y:
+    print("uhmmmm")
+default:
+    print("This roll doesn't matter to us")
+}
+/*
  */
 
 
@@ -40,8 +52,19 @@ default:
  - Halloween Day - Oct 31
  - Otherwise, indiciate the given day is not a holiday
  */
-
-
+var holidayCall = ("Dec", 25)
+switch holidayCall {
+case ("Dec", 25):
+    print("Christmas Day")
+case ("Jan", 1):
+    print("New Years day")
+case ("Feb", 14):
+    print("Valentine's Day")
+case ("Oct", 31):
+    print("Halloween day")
+default:
+    print("enoughhhhhhhh")
+}
 /*:
  - Callout(Challenge):
  Take a look at the following X-Y Graph.
@@ -54,6 +77,18 @@ default:
  - point is inside the blue outlined box
  - point is outside the blue outlined box
  */
-
+var graphCall = (1, 25)
+switch graphCall {
+case (_, 0):
+    print("point is on the x axis")
+case (0,_):
+    print("point is on the y axis")
+case (-2...2, -2...2):
+    print("point is inside the blue outlined box")
+case (let x, let y) where x > 2 || x < -2 || y > 2 || y < -2:
+    print("point is outside the blue outlined box")
+default:
+    print("enoughhhhhhhh")
+}
 
 //: [Next](@next)
