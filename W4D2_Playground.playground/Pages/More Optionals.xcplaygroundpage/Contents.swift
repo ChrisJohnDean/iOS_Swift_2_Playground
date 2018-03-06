@@ -7,25 +7,29 @@
  - Experiment:
  Declare a optional Double value and set it to nil.
  */
-
+var double: Double? = nil
 
 /*:
  - Experiment:
  Assign a value your optional Double.
  */
-
+double = 5.0
 
 /*:
  - Experiment:
  Force unwrap the optional value. Why do you have to be careful about force unwrapping?
  */
-
+double!
 
 /*:
  - Experiment:
  Use conditional unwrapping to verify if the optional has a value. Print the value if there is something, otherwise, print out to indicate there is no value present. Why is conditional unwrapping better than force unwrapping?
  */
-
+if let double = double {
+    print(double)
+} else {
+    print("no value here")
+}
 
 /*:
  - Callout(Challenge):
@@ -33,6 +37,15 @@
  */
 var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
 
+var i = 0
+while i < testData.count {
+    if testData[i] == nil {
+        testData.remove(at: i)
+    } else {
+        i += 1
+    }
+}
+print(testData)
 
 /*:
  - Callout(Challenge):
@@ -40,7 +53,7 @@ var testData: [String?] = ["Heather", nil, "Mike", "John", nil, nil, "Bob"]
  If the user has filled in everything correctly, we want to print all information out.
  Below is some test data you can use to test your function.
  */
-// Should pass all checks and print all information
+//// Should pass all checks and print all information
 let username: String? = "user1"
 let password: String? = "password123"
 let email: String? = "user1@lighthouselabs.ca"
@@ -55,7 +68,27 @@ let email: String? = "user1@lighthouselabs.ca"
 //let password: String? = nil
 //let email: String? = "user1@lighthouselabs.ca"
 
+func validate(username:String?, password:String?, email:String?) {
+    if let validUser = username {
+        print(validUser)
+    } else {
+        print("Username field is blank silly!")
+    }
+    
+    if let password = password {
+        print(password)
+    } else {
+        print("password field is blank silly!")
+    }
+    
+    if let email = email {
+        print(email)
+    } else {
+        print("email field is blank silly!")
+    }
+}
 
+//validate(username: username, password: password, email: email)
 
 /*:
  ## Guard Let
@@ -86,13 +119,17 @@ isMyNumberANegativeValue(myNumber: myNumber)
  Try creating your own guard statement with different conditional statements. Notice which boolean condition causes the code the enter the 'else' block or bypass it entirely.
  */
 
-
 /*:
  - Experiment:
  Create a function that takes in two number parameters and divide them. We don't like dividing by zero, so ensure this doesn't happen. Otherwise, return the calculated value.
  */
 
+func divide(numOne: Int, numTwo: Int) -> Int {
+    guard numOne > 0 && numTwo > 0 else {return 0}
+    return numOne/numTwo
+}
 
+divide(numOne: 5, numTwo: 10)
 /*:
  Let's take a look at another example and see how we can use guard for optionals
  */
@@ -123,12 +160,42 @@ isMyNumberAnOptional(myOptionalNumber: myOptionalNumber)
  - Experiment:
  Create a function that takes in an array of numbers. Have the function add all the numbers together and return the result. Make sure to `guard` against an empty array. Use `array.first` to check if there is at least one value in the array.
  */
+func addNumbers(array:Array<Int>?) -> Int {
+    guard let array = array else {return 0}
+    
+    var sum = 0
+    for i in array {
+        sum += i
+    }
+    
+    return sum
+}
 
-
+addNumbers(array: [4,7,9,2])
 /*:
  - Callout(Challenge):
  Now that we've learnt this new guard statement, let's rewrite the form validation challenge using the guard statements. How does it improve our current implementation?
  */
 
 
+func validateAgain(username:String?, password:String?, email:String?) {
+    guard let username = username else {
+        print("Username field is blank silly!")
+        return
+    }
+    
+    guard let password = password else {
+        print("password field is blank silly!")
+        return
+    }
+    
+    guard let email = email else {
+        print("email field is blank silly!")
+        return
+    }
+    print(username, password, email)
+}
+
+validateAgain(username: username, password: password, email: email)
 //: [Next](@next)
+
