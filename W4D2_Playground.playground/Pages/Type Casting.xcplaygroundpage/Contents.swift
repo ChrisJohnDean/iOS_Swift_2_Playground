@@ -29,7 +29,17 @@ let myView: UIView = UIButton()
  Try using the `is` operator on `myView`. Take a look at the evaluation on the right to see what the results are. ie: `myView is UIView`. Try checking if `myView` is any of the following views: `UIButton`, `UITableView`, `UIImageView`
  */
 
-
+if myView is UIView {
+    print("true")
+}
+if myView is UIButton {
+    print("true")
+}
+if myView is UITableView {
+    print("true")
+} else {
+    print("false")
+}
 /*:
  - Experiment:
  Because 'myView' is a UIView, we can't call UIButton specific methods such as 'setTitle'
@@ -50,7 +60,9 @@ let myCastedButtonView = myView as? UIButton
  - Experiment:
  Now that we downcast our `myView` to an actual UIButton, use conditional unwrapping to ensure it is not nil, then try calling the `setTitle` method to ensure it can be called.
  */
-
+if let myCastedButtonView = myCastedButtonView {
+    myCastedButtonView.setTitle("myTitle", for: UIControlState.normal)
+}
 
 /*:
  - Callout(Challenge):
@@ -68,7 +80,17 @@ view.addSubview(UIButton())
  And we need to find all buttons. Write a function to search for `UIButtons` in this view's `subviews`, and return an array will all the buttons.
  */
 
-
+func findAllButtons() {
+    var buttonArray = [UIButton]()
+    
+    for myView in view.subviews {
+        
+        if myView is UIButton {
+            let myView = myView as! UIButton
+            buttonArray.append(myView)
+        }
+    }
+}
 /*:
  - Callout(Challenge - Part 1):
  Finish the implementation of the `Movie` class and `Song` class. The `Movie` class will have a new property called `director` to store the director's name. The `Song` class will have a new property called `artist` to store the artist's name. Ensure you add their respective initializer methods as well to setup their properties.
@@ -82,16 +104,26 @@ class MediaItem {
 }
 
 class Movie: MediaItem {
+    var director: String
+    init(name: String, director: String) {
+        self.director = director
+        super.init(name: name)
+    }
 }
 
 class Song: MediaItem {
+    var artist: String
+    init(name: String, artist: String) {
+        self.artist = name
+        super.init(name: name)
+    }
 }
 
 /*:
  - Callout(Challenge - Part 2):
  Now take the array below of MediaItems and create a for loop on the array that prints out what type of media item it is and print out their properties.
  */
-/*
+
 let library = [
   Movie(name: "Casablanca", director: "Michael Curtiz"),
   Song(name: "Blue Suede Shoes", artist: "Elvis Presley"),
@@ -99,6 +131,17 @@ let library = [
   Song(name: "The One And Only", artist: "Chesney Hawkes"),
   Song(name: "Never Gonna Give You Up", artist: "Rick Astley")
 ]
-*/
+
+for i in library {
+    
+    if i is Movie {
+        print(type(of: i))
+        let i = i as! Movie
+        print(i.name, i.director)
+    } else {
+        let i = i as! Song
+        print(i.name, i.artist)
+    }
+}
 
 //: [Next](@next)
