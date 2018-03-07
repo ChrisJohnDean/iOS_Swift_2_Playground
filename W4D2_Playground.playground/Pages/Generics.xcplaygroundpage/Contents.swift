@@ -33,7 +33,10 @@ printMyTwoNumbers(num1: "three", num2: "four")
  - Experiment:
  Now you try! Write a generic function that takes in two parameters and multiply their value together and print the result. (Hint: You might run into an error after finishing. Continue to the next experiment to find out why!)
  */
-
+func multipleTwoThings<Whatever: Numeric>(thing1: Whatever, thing2: Whatever) {
+    let x = thing1 * thing2
+    print(x)
+}
 
 /*:
  - Experiment:
@@ -74,7 +77,12 @@ func multiply<Element: Numeric>(num1: Element, num2: Element) {
  - enqueue: add an item to the queue
  - dequeue: remove an item from the queue, and return the removed element
  */
-
+//public struct Queue {
+//    var array = []()
+//    func enqueue() {
+//        array.append
+//    }
+//}
 
 
 //: [Next](@next)
